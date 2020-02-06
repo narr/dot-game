@@ -51,10 +51,6 @@ body {
     margin-left: 20px;
     font-size: 30px;
 
-    &:before {
-      content: '+';
-    }
-
     &--active {
       display: inline;
       animation-name: fade-in-up;
@@ -71,6 +67,14 @@ body {
           opacity: 0;
         }
       }
+    }
+
+    &--plus {
+      color: #bdeaff;
+    }
+
+    &--minus {
+      color: #f64663;
     }
   }
 }

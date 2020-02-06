@@ -132,6 +132,9 @@ function updateDotPositions() {
   document.querySelectorAll('.dot').forEach(dot => {
     const dotPosition = parseFloat(dot.style.top);
     if (dotPosition > gameHeight) {
+      updateScore(
+        -1 * getScoreIncrease(dot.offsetWidth, DOT_SIZE_MAX, DOT_SIZE_MIN)
+      );
       removeDot(dot);
     } else {
       dot.style.top = `${dotPosition +
@@ -192,13 +195,25 @@ function getScoreIncrease(dotSize, dotSizeMax, dotSizeMin) {
 function updateScore(increase) {
   const scoreEl = document.querySelectorAll('.score__value')[0];
   const currentScore = Number(scoreEl.textContent);
-  scoreEl.textContent = currentScore + increase;
+  if (currentScore + increase > 0) {
+    scoreEl.textContent = currentScore + increase;
+  } else {
+    scoreEl.textContent = 0;
+  }
   showScoreIncrease(increase);
 }
 
 function showScoreIncrease(increase) {
   const scoreIncreaseEl = getScoreIncreaseEl();
-  scoreIncreaseEl.textContent = increase;
+  if (increase > 0) {
+    scoreIncreaseEl.textContent = `+${increase}`;
+    scoreIncreaseEl.classList.remove('score__increase--minus');
+    scoreIncreaseEl.classList.add('score__increase--plus');
+  } else {
+    scoreIncreaseEl.textContent = `${increase}`;
+    scoreIncreaseEl.classList.remove('score__increase--plus');
+    scoreIncreaseEl.classList.add('score__increase--minus');
+  }
   triggerAnimationByTogglingClass(scoreIncreaseEl, 'score__increase--active');
 }
 
