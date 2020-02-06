@@ -44,6 +44,7 @@ function getScoreIncreaseEl(index = 0) {
 function createDot() {
   const el = document.createElement('div');
   el.className = 'dot';
+  el.setAttribute('data-testid', 'dot');
   const size = random(DOT_SIZE_MIN, DOT_SIZE_MAX);
   Object.assign(el.style, {
     backgroundColor: getRandomBrightColor(),

@@ -1,6 +1,10 @@
 module.exports = {
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-  env: { browser: true, es6: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+    'plugin:cypress/recommended',
+  ],
+  env: { browser: true, es6: true, node: true },
   rules: {
     'max-lines': [
       'error',
@@ -10,5 +14,6 @@ module.exports = {
     'no-param-reassign': 'error',
     'no-var': 'error',
     'prefer-const': 'error',
+    'cypress/no-unnecessary-waiting': 'off',
   },
 };
