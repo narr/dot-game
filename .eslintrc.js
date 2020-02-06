@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-  env: { es6: true },
+  env: { browser: true, es6: true },
   rules: {
     'max-lines': [
       'error',

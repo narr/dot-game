@@ -5,7 +5,7 @@
   "author": "https://github.com/narr",
   "license": "MIT",
   "engines": {
-    "node": ">=10.15.3"
+    "node": ">=10.0.0"
   },
   "dependencies": {
     "express": "^4.17.1",
