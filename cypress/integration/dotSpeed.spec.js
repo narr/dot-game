@@ -19,10 +19,10 @@ describe('Dot Speed', () => {
     cy.get('[data-testid=dot]').then($dots => {
       const initialPosition = $dots[0].offsetTop;
       cy.wait(2000).then(() => {
-        const increaseRatePerSec = 10;
+        const increasePerSec = 10;
         const seconds = 2;
-        const increase = increaseRatePerSec * seconds;
-        const tolerance = 2;
+        const increase = increasePerSec * seconds;
+        const tolerance = increasePerSec * (seconds - 1);
         const expected = initialPosition + increase;
         expect($dots[0].offsetTop).within(
           expected - tolerance,
@@ -49,7 +49,7 @@ describe('Dot Speed', () => {
         const increasePerSec = 100;
         const seconds = 2;
         const increase = increasePerSec * seconds;
-        const tolerance = 10;
+        const tolerance = increasePerSec * (seconds - 1);
         const expected = initialPosition + increase;
         expect($dots[0].offsetTop).within(
           expected - tolerance,
