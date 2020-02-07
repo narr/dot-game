@@ -3,7 +3,7 @@
 // NOTE: As it is difficult to test animation in CI env, test these cases only in local
 
 describe('Dot Speed', () => {
-  if (!Cypress.env('SKIP_E2E_TESTS')) {
+  if (Cypress.env('SKIP_E2E_TESTS')) {
     return;
   }
 
