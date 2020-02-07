@@ -1,6 +1,12 @@
 /// <reference types="Cypress" />
 
+// NOTE: As it is difficult to test animation in CI env, test these cases only in local
+
 describe('Dot Speed', () => {
+  if (!Cypress.env('SKIP_E2E_TESTS')) {
+    return;
+  }
+
   beforeEach(() => {
     cy.visit('/');
   });
@@ -22,8 +28,8 @@ describe('Dot Speed', () => {
         const increasePerSec = 10;
         const seconds = 2;
         const increase = increasePerSec * seconds;
-        const tolerance = increasePerSec * (seconds - 1);
         const expected = initialPosition + increase;
+        const tolerance = increasePerSec * (seconds - 1);
         expect($dots[0].offsetTop).within(
           expected - tolerance,
           expected + tolerance
@@ -49,8 +55,8 @@ describe('Dot Speed', () => {
         const increasePerSec = 100;
         const seconds = 2;
         const increase = increasePerSec * seconds;
-        const tolerance = increasePerSec * (seconds - 1);
         const expected = initialPosition + increase;
+        const tolerance = increasePerSec * (seconds - 1);
         expect($dots[0].offsetTop).within(
           expected - tolerance,
           expected + tolerance

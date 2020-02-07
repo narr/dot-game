@@ -29,7 +29,7 @@
     "dev": "cross-env PORT=8000 npm start",
     "lint": "eslint **/*.js",
     "test": "cypress open",
-    "test:ci": "cross-env CYPRESS_baseUrl=http://localhost:8001 cypress run",
+    "test:ci": "cross-env CYPRESS_baseUrl=http://localhost:8001 SKIP_E2E_TESTS=true cypress run",
     "serve": "cross-env PORT=8001 npm start",
     "ci": "npm-run-all --parallel --race --print-label serve test:ci"
   },
