@@ -20,6 +20,11 @@ Dots move from the top to the bottom of the screen. A player tries to click on t
 
 - When a dot is removed by reaching to the bottom of the screen, the score should be decreased based on the dot's value.
 
+[Performance Improvement]
+
+- Use requestAnimationFrame for smooth animation (60 FPS)
+- Use event delegation on Dot click and other events for memory efficiency
+
 ## Prerequisites
 
 [Node.js](https://nodejs.org/en/) >= version 10.0.0
