@@ -1,14 +1,8 @@
 /// <reference types="Cypress" />
 
-describe('Click Dot', () => {
-  function getScoreIncrease(dotSize, dotSizeMax, dotSizeMin) {
-    const minPoint = 1;
-    const maxPoint = 10;
-    const pointRange = maxPoint - minPoint;
-    const pointPerOneRange = (dotSizeMax - dotSizeMin) / pointRange;
-    return maxPoint - Math.ceil((dotSize - dotSizeMin) / pointPerOneRange);
-  }
+import { getScoreIncrease } from '../../public/index.js';
 
+describe('Click Dot', () => {
   beforeEach(() => {
     cy.visit('/');
   });
@@ -18,7 +12,7 @@ describe('Click Dot', () => {
   inversely proportional to its size, with the smallest dots worth 10 points,
   and the largest dots worth 1 point.`, () => {
     cy.contains('button', 'START').click();
-    cy.wait(2000)
+    cy.wait(3000)
       .get('[data-testid=dot]')
       .then($dots => {
         $dots.each((idx, val) => {
@@ -33,34 +27,45 @@ describe('Click Dot', () => {
           })
           .get();
 
-        let dotIdxToClick = dotsData.length - 1;
-        cy.wrap($dots[dotIdxToClick]).click();
-        cy.log('Clicked Dot should disappear')
-          .get(dotsData[dotIdxToClick].selector)
-          .should('not.exist');
-        cy.log(`score should be increased based on the dot's value`)
-          .get('[data-testid=score-value]')
-          .should('have.text', dotsData[dotIdxToClick].point.toString());
+        cy.get(dotsData[0].selector)
+          .click()
+          .then(() => {
+            cy.log(
+              'Clicked Dot should disappear: selector is',
+              dotsData[0].selector
+            );
+            cy.get(dotsData[0].selector).should('not.exist');
 
-        dotIdxToClick = dotIdxToClick - 1;
-        cy.wrap($dots[dotIdxToClick]).click();
-        cy.log('Clicked Dot should disappear')
-          .get(dotsData[dotIdxToClick].selector)
-          .should('not.exist');
+            cy.log(`Score should be increased based on the dot's value`)
+              .get('[data-testid=score-value]')
+              .should('have.text', dotsData[0].point.toString());
+          });
 
-        cy.log(`score should be increased based on the dot's value`)
-          .get('[data-testid=score-value]')
-          .should(
-            'have.text',
-            dotsData
-              .filter((val, idx) => {
-                return !(idx < dotIdxToClick);
-              })
-              .reduce((accumulator, currentValue) => {
-                return accumulator + currentValue.point;
-              }, 0)
-              .toString()
-          );
+        if (dotsData.length > 1) {
+          cy.get(dotsData[1].selector)
+            .click()
+            .then(() => {
+              cy.log(
+                'Clicked Dot should disappear: selector is',
+                dotsData[1].selector
+              );
+              cy.get(dotsData[1].selector).should('not.exist');
+
+              cy.log(`Score should be increased based on the dot's value`)
+                .get('[data-testid=score-value]')
+                .should(
+                  'have.text',
+                  dotsData
+                    .filter((val, idx) => {
+                      return idx < 2;
+                    })
+                    .reduce((accumulator, currentValue) => {
+                      return accumulator + currentValue.point;
+                    }, 0)
+                    .toString()
+                );
+            });
+        }
       });
   });
 });

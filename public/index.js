@@ -185,7 +185,7 @@ function handleDotClick(dot) {
   dot.classList.add('dot--pop');
 }
 
-function getScoreIncrease(dotSize, dotSizeMax, dotSizeMin) {
+export function getScoreIncrease(dotSize, dotSizeMax, dotSizeMin) {
   const minPoint = 1;
   const maxPoint = 10;
   const pointRange = maxPoint - minPoint;
@@ -218,11 +218,9 @@ function showScoreIncrease(increase) {
   triggerAnimationByTogglingClass(scoreIncreaseEl, 'score__increase--active');
 }
 
-function init() {
+export function init() {
   initScoreIncrease();
   initSpeedController();
   initStartStopBtn();
   initGameZone();
 }
-
-init();
