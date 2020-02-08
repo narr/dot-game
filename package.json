@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.0",
-    "cypress": "^3.8.3",
+    "cypress": "^4.0.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-cypress": "^2.9.0",
@@ -30,9 +30,9 @@
     "lint": "eslint **/*.js",
     "cypress": "cypress open",
     "test": "npm-run-all --parallel --race --print-label dev cypress",
-    "test:ci": "cross-env CYPRESS_baseUrl=http://localhost:8001 cypress run",
+    "test:ci": "cross-env CYPRESS_baseUrl=http://localhost:8001 cypress run --browser chrome --headless",
     "serve": "cross-env PORT=8001 npm start",
-    "ci": "cross-env CYPRESS_SKIP_E2E_TESTS=true npm-run-all --parallel --race --print-label serve test:ci"
+    "ci": "npm-run-all --parallel --race --print-label serve test:ci"
   },
   "private": true,
   "husky": {
